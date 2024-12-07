@@ -57,7 +57,13 @@ class Dog extends EngineObject {
     this.counter = 0
   }
   update() {
-    this.pos = cameraPos.copy()
+    // this.pos = cameraPos.copy()
+    // if (this.item.type === 'brush' && this.item.isSelected) {
+    //   this.animationFrames = dogAnimationFrames.happy.indexes
+    //   this.velocity = vec2(0)
+    //   this.animationIndex += 1
+    //   this.angle = getAdjustedAngle(this.pos, this.item.pos)
+    // } else
     if (
       this.item.type === 'filledBowl' &&
       this.pos.distance(this.item.pos) < 0.5
@@ -95,6 +101,7 @@ class Dog extends EngineObject {
       const gap = this.target === 'player' ? 0.2 : 0.3
 
       this.angle = getAdjustedAngle(this.pos, this.targetPos)
+      this.animationFrames = dogAnimationFrames[this.angle].indexes
 
       if (this.pos.distance(this.targetPos) > gap && !this.item.isSelected) {
         this.moveInput = vec2(
@@ -129,9 +136,10 @@ class Dog extends EngineObject {
           this.target = 'player'
           this.item.isFetched = true
         }
+
+        this.animationFrames = dogAnimationFrames.happy.indexes
       }
-      this.animationFrames = dogAnimationFrames[this.angle].indexes
-      this.animationIndex += 2
+      this.animationIndex += !this.velocity.x && !this.velocity.y ? 1 : 2
     }
 
     if (this.animationIndex >= this.animationFrames.length - 1)
@@ -149,6 +157,16 @@ class Dog extends EngineObject {
       dogAnimationFrames[this.angle].mirror,
     )
   }
+}
+
+const isItemOutsideViewPort = pos => {
+  const { x, y } = pos
+  return (
+    x > levelSize.x / -2 &&
+    x < levelSize.x / 2 &&
+    y > levelSize.y / -2 &&
+    y < levelSize.y / 2
+  )
 }
 
 class Item extends EngineObject {
@@ -175,6 +193,9 @@ class Item extends EngineObject {
   update() {
     this.moveInput = vec2(0)
     const dog = this.dog
+    if (!isItemOutsideViewPort(this.pos)) {
+      dog.target = this.isFetched ? 'player' : 'item'
+    }
 
     if (this.isFetched && !dog.isResting) {
       const offset = this.frames[dog.animationIndex]

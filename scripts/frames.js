@@ -6,7 +6,7 @@ const walkFrames = (a, b, c, repeat = 10) => {
   ]
 }
 
-const idleFrames = (a, b, repeat = 10) => {
+const twinFrames = (a, b, repeat = 10) => {
   return [
     ...new Array(repeat).fill('').map(() => a),
     ...new Array(repeat).fill('').map(() => b),
@@ -46,7 +46,13 @@ const dogAnimationFrames = {
     brushOffset: vec2(-0.1, -0.14),
   },
   idle: {
-    indexes: idleFrames(9, 10),
+    indexes: twinFrames(9, 10),
+  },
+  relax: {
+    indexes: twinFrames(11, 12),
+  },
+  happy: {
+    indexes: twinFrames(13, 14, 8),
   },
 }
 

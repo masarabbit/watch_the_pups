@@ -23,7 +23,7 @@ tileFixBleedScale = 0.2
 
 // TODO update sprite (clean up colour)
 
-//TODO add panting dog
+//TODO add panting dog (probably should add front and back view)
 // TODO add score
 
 const sound_bounce = new Sound(
