@@ -73,3 +73,14 @@ const items = {
   filledBowl: 6,
   food: 7,
 }
+
+const reactions = {
+  heart: {
+    frame: 8,
+    score: 500,
+  },
+  star: {
+    frame: 9,
+    score: 100,
+  },
+}

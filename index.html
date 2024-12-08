@@ -3,13 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <title>puppies</title>
   </head>
-  <body></body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="menu">
+        <button class="start-btn">start</button>
+      </div>
+      <div class="end-menu menu d-none">
+        time up!
+        <button class="start-btn">play again</button>
+      </div>
+    </div>
+    <div class="sign">
+      by masahito / <a href="http://www.ma5a.com/">ma5a.com</a>
+    </div>
+    <button class="pause-btn">pause</button>
+  </body>
   <script src="dist/littlejs.min.js" charset="utf-8"></script>
+  <script src="scripts/sound.js" charset="utf-8"></script>
   <script src="scripts/variables.js" charset="utf-8"></script>
+  <script src="scripts/music.js" charset="utf-8"></script>
   <script src="scripts/utils.js" charset="utf-8"></script>
   <script src="scripts/frames.js" charset="utf-8"></script>
-  <script src="scripts/gameObjects.js" charset="utf-8"></script>
+  <script src="scripts/objects/env.js" charset="utf-8"></script>
+  <script src="scripts/objects/dog.js" charset="utf-8"></script>
+  <script src="scripts/objects/item.js" charset="utf-8"></script>
   <script src="scripts/main.js" charset="utf-8"></script>
 </html>
