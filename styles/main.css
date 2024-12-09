@@ -29,7 +29,7 @@ button {
   background-color: hotpink;
   color: #fff;
   padding: 16px 20px;
-  font-size: 1rem;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -67,6 +67,11 @@ a:hover {
   bottom: 10px;
   left: 10px;
   padding: 8px 12px;
-  font-size: 0.8rem;
+  font-size: 12px;
   z-index: 1;
+  /* width: 64px;
+  height: 64px;
+  background-size: 64px;
+  image-rendering: pixelated;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAEVJREFUWEft1jEKADAIBLDe/x9t6dqhUBBc4q4ewcGs4crw/iUAgadAVdV9pElae1qHnbC/oQUgQIAAAQIECBDwFRMgsAFZoKAhQC4INAAAAABJRU5ErkJggg==); */
 }

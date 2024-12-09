@@ -7,7 +7,14 @@ class Item extends EngineObject {
     this.color = new Color(1, 1, 1)
     this.throwAngle = 0
     this.type = type || 'ball'
-    this.tileInfo = new TileInfo(vec2(32 * items[this.type], 0), vec2(32), 2)
+    ;(this.sprite = ['ball', 'bowl'].includes(this.type)
+      ? items[this.type].sprite()
+      : vec2(32 * items[this.type].sprite, 0)),
+      (this.tileInfo = new TileInfo(
+        this.sprite,
+        vec2(32),
+        items[this.type].spriteSheet,
+      ))
     this.dog = dog
     this.dragStartMousePos = null
     this.dragStartPos = null
@@ -126,7 +133,7 @@ class Food extends EngineObject {
     this.size = vec2(0.5)
     this.isSelected = false
     this.color = new Color(1, 1, 1)
-    this.tileInfo = new TileInfo(vec2(32 * items.food, 0), vec2(32), 2)
+    this.tileInfo = new TileInfo(vec2(0), vec2(32), 5)
     this.dragStartMousePos = null
     this.dragStartPos = null
     this.prevPos = null
@@ -173,12 +180,13 @@ class Food extends EngineObject {
       this.angle = degToRad(getAdjustedAngle(this.pos, o.pos) < 180 ? 45 : -45)
       o.foodAmount++
       o.tileInfo.pos = vec2(
-        32 * (o.foodAmount > 80 ? 5 : o.foodAmount > 40 ? 4 : 3),
+        32 * (o.foodAmount > 80 ? 2 : o.foodAmount > 40 ? 1 : 0),
+        o.sprite.y,
       )
 
       if (o.foodAmount > 120) {
         o.type = 'filledBowl'
-        o.tileInfo.pos = vec2(32 * 6)
+        o.tileInfo.pos = vec2(32 * 3, o.sprite.y)
         soundEffect.foodReady.play(this.pos)
       }
     }

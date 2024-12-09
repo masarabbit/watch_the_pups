@@ -8,14 +8,14 @@ class Reaction extends EngineObject {
         32 *
           reactions[
             {
-              filledBowl: 'heart',
-              bowl: 'heart',
-              brush: 'heart',
               bone: 'star',
               ball: 'star',
+              brush: 'heart',
+              filledBowl: 'sun',
+              bowl: 'sun',
             }[dog.item.type]
-          ].frame,
-        0,
+          ],
+        2,
       ),
       vec2(32),
       2,
@@ -27,8 +27,10 @@ class Reaction extends EngineObject {
       this.destroy()
       createNewDog(
         itemTypes.filter(item => item !== this.dog.item.type)[randomN(2) - 1],
+        randomN(4) - 1,
       )
-      if (gameScore.number > 1000) createNewDog(this.dog.item.type)
+      if (gameScore.number > 800)
+        createNewDog(this.dog.item.type, randomN(4) - 1)
     }
     super.update()
   }
@@ -38,7 +40,7 @@ class Reaction extends EngineObject {
 }
 
 class Dog extends EngineObject {
-  constructor(pos, item) {
+  constructor(pos, item, i) {
     super(pos, vec2(0.5))
     this.setCollision()
     this.startingPos = pos
@@ -54,6 +56,7 @@ class Dog extends EngineObject {
     this.lingerCount = 0
     this.state = 'default'
     this.maxSpeed = 0.05
+    this.dogIndex = i
   }
   eat() {
     this.velocity = vec2(0)
@@ -65,12 +68,13 @@ class Dog extends EngineObject {
     this.item.tileInfo.pos = vec2(
       32 *
         (this.satisfaction > 120
-          ? 3
+          ? 0
           : this.satisfaction > 80
-          ? 4
+          ? 1
           : this.satisfaction > 40
-          ? 5
-          : 6),
+          ? 2
+          : 3),
+      this.item.sprite.y,
     )
     if (this.satisfaction > 120) {
       this.state = 'happy'
@@ -140,15 +144,14 @@ class Dog extends EngineObject {
   }
   updateScore() {
     gameScore.number += {
-      bowl: 500,
-      brush: 200,
       bone: 100,
       ball: 100,
+      bowl: 500,
+      brush: 300,
     }[this.item.type]
     gameScore.updateScore()
   }
   update() {
-    // if(this.satisfaction > 120) {}
     if (this.satisfaction > 120 && !this.item.isFetched) {
       if (this.lingerCount <= 200) {
         if (!this.reaction) {
@@ -187,7 +190,12 @@ class Dog extends EngineObject {
     drawTile(
       this.pos,
       vec2(0.5),
-      tile(vec2(32 * this.animationFrames[this.animationIndex])),
+      tile(
+        vec2(
+          32 * this.animationFrames[this.animationIndex],
+          32 * this.dogIndex,
+        ),
+      ),
       this.color,
       0,
       dogAnimationFrames[this.angle].mirror,

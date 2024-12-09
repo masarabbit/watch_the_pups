@@ -32,9 +32,8 @@ document.querySelector('.pause-btn').addEventListener('click', e => {
 
 const startGame = () => {
   itemTypes.forEach((item, i) => {
-    dogs.push(new Dog(getRandomPos(i * 1000), item))
+    dogs.push(new Dog(getRandomPos(i * 1000), item, i))
   })
-
   food = new Food(
     screenToWorld(vec2(mainCanvasSize.x - 80, mainCanvasSize.y - 80)),
   )
@@ -105,5 +104,8 @@ function gameRenderPost() {
 engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'puppies.png',
   'numbers.png',
+  'reactions.png',
+  'balls.png',
+  'foods.png',
   'other.png',
 ])

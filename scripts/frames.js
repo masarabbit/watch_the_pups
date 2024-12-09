@@ -66,21 +66,26 @@ const dogAnimationFrames = {
 dogAnimationFrames[360] = dogAnimationFrames[0]
 
 const items = {
-  ball: 0,
-  bone: 1,
-  brush: 2,
-  bowl: 3,
-  filledBowl: 6,
-  food: 7,
+  ball: {
+    sprite: () => vec2(-32 * randomN(4) - 1, 0),
+    spriteSheet: 3,
+  },
+  bone: {
+    sprite: 1,
+    spriteSheet: 5,
+  },
+  brush: {
+    sprite: 2,
+    spriteSheet: 5,
+  },
+  bowl: {
+    sprite: () => vec2(0, 32 * randomN(3) - 1),
+    spriteSheet: 4,
+  },
 }
 
 const reactions = {
-  heart: {
-    frame: 8,
-    score: 500,
-  },
-  star: {
-    frame: 9,
-    score: 100,
-  },
+  star: 0,
+  heart: 1,
+  sun: 2,
 }

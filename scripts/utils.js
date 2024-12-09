@@ -43,8 +43,8 @@ const getRandomPos = (offset = 0) => {
   return screenToWorld(vec2(x, y))
 }
 
-const createNewDog = item => {
-  dogs.push(new Dog(getRandomPos(), item))
+const createNewDog = (item, i) => {
+  dogs.push(new Dog(getRandomPos(), item, i))
   if (item === 'bowl') {
     const currentPos = food.pos
     food.destroy()
