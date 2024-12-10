@@ -147,6 +147,7 @@ class Dog extends EngineObject {
       bone: 100,
       ball: 100,
       bowl: 500,
+      filledBowl: 500,
       brush: 300,
     }[this.item.type]
     gameScore.updateScore()
