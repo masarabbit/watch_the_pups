@@ -25,8 +25,6 @@ window.addEventListener('resize', () => {
 })
 
 const itemTypes = ['bone', 'bowl', 'ball', 'brush']
-const menus = document.querySelectorAll('.menu')
-const endMenu = document.querySelector('.end-menu')
 
 //music
 let timeline = 0

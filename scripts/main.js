@@ -5,31 +5,6 @@
 // TODO add pause button image
 // TODO add intro image ? (based on new dog sprites)
 
-document.querySelectorAll('.start-btn').forEach((b, i) => {
-  b.addEventListener('click', () => {
-    isGamePaused = false
-    menus[i].classList.add('d-none')
-    soundEffect.start.play(mousePos)
-    setTimeout(() => startMusic(mainMusic), 1000)
-    if (i) reStartGame()
-  })
-})
-
-document.querySelector('.pause-btn').addEventListener('click', e => {
-  if (!dogs.length) return
-
-  isGamePaused = !isGamePaused
-  if (isGamePaused) {
-    e.target.innerText = 'resume'
-    soundEffect.pause.play(mousePos)
-    stopMusic()
-  } else {
-    e.target.innerText = 'pause'
-    soundEffect.start.play(mousePos)
-    setTimeout(() => startMusic(mainMusic), 1000)
-  }
-})
-
 const startGame = () => {
   itemTypes.forEach((item, i) => {
     dogs.push(new Dog(getRandomPos(i * 1000), item, i))
@@ -109,3 +84,34 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'foods.png',
   'other.png',
 ])
+
+function init() {
+  const menus = document.querySelectorAll('.menu')
+
+  document.querySelectorAll('.start-btn').forEach((b, i) => {
+    b.addEventListener('click', () => {
+      isGamePaused = false
+      menus[i].classList.add('d-none')
+      soundEffect.start.play(mousePos)
+      setTimeout(() => startMusic(mainMusic), 1000)
+      if (i) reStartGame()
+    })
+  })
+
+  document.querySelector('.pause-btn').addEventListener('click', e => {
+    if (!dogs.length) return
+
+    isGamePaused = !isGamePaused
+    if (isGamePaused) {
+      e.target.innerText = 'resume'
+      soundEffect.pause.play(mousePos)
+      stopMusic()
+    } else {
+      e.target.innerText = 'pause'
+      soundEffect.start.play(mousePos)
+      setTimeout(() => startMusic(mainMusic), 1000)
+    }
+  })
+}
+
+window.addEventListener('DOMContentLoaded', init)
