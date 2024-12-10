@@ -51,3 +51,18 @@ const createNewDog = (item, i) => {
     food = new Food(currentPos)
   }
 }
+
+// This is used because as of 11th Dec 2024, click events didn't seem to work on mobile
+const isElementClicked = element => {
+  if (!element) return
+  const { x, y, width, height } = element.getBoundingClientRect()
+  const topLeft = screenToWorld(vec2(x, y))
+  const bottomRight = screenToWorld(vec2(x + width, y + height))
+  const isClickedWithinElement =
+    mousePos.x > topLeft.x &&
+    mousePos.y < topLeft.y &&
+    mousePos.x < bottomRight.x &&
+    mousePos.y > bottomRight.y
+  if (isClickedWithinElement) clickedElement = element?.dataset.id
+  return isClickedWithinElement
+}

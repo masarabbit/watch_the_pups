@@ -1,4 +1,6 @@
 const menus = document.querySelectorAll('.menu')
+const startBtns = document.querySelectorAll('.start-btn')
+const pauseBtn = document.querySelector('.pause-btn')
 const dogs = []
 let selectedItem
 let timeCount
@@ -6,6 +8,9 @@ let gameTime
 let gameScore
 let food
 let isGamePaused = true
+let musicTimer
+let clickedElement
+const buttons = []
 
 tileSizeDefault = (32, 32)
 tileFixBleedScale = 0.2
@@ -17,13 +22,6 @@ let levelSize = vec2(
   Math.round(window.innerWidth / cameraScale),
   Math.round(window.innerHeight / cameraScale),
 )
-
-window.addEventListener('resize', () => {
-  levelSize = vec2(
-    Math.round(window.innerWidth / cameraScale),
-    Math.round(window.innerHeight / cameraScale),
-  )
-})
 
 const itemTypes = ['bone', 'bowl', 'ball', 'brush']
 

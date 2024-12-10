@@ -1,6 +1,7 @@
 'use strict'
 // TODO add instruction
 // TODO add music toggle
+// TODO adjust sprite colours to make them consistent
 
 // TODO add intro image ? (based on new dog sprites)
 
@@ -17,6 +18,7 @@ const startGame = () => {
 }
 
 const reStartGame = () => {
+  console.log('restart', gameTime)
   if (dogs.length) {
     dogs.forEach(dog => {
       dog.item.destroy()
@@ -25,44 +27,47 @@ const reStartGame = () => {
     dogs.length = 0
   }
   if (food) food.destroy()
-  if (gameTime) gameTime.destroy()
+  if (gameTime) {
+    gameTime.destroy()
+    console.log('destroy')
+  }
   if (gameScore) gameScore.destroy()
   startGame()
 }
+
+const togglePause = () => {
+  isGamePaused = !isGamePaused
+  if (isGamePaused) {
+    pauseBtn.innerText = 'resume'
+    soundEffect.pause.play(mousePos)
+    clearTimeout(musicTimer)
+    stopMusic()
+  } else {
+    pauseBtn.innerText = 'pause'
+    soundEffect.start.play(mousePos)
+    clearTimeout(musicTimer)
+    musicTimer = setTimeout(() => startMusic(mainMusic), 1000)
+  }
+}
+
+// window.addEventListener('resize', () => {
+//   if (!isGamePaused) togglePause()
+//   levelSize = vec2(
+//     Math.round(window.innerWidth / cameraScale),
+//     Math.round(window.innerHeight / cameraScale),
+//   )
+// })
+
 function gameInit() {
   // called once after the engine starts up - setup the game
-
-  document.querySelectorAll('.start-btn').forEach((b, i) => {
-    console.log('button actions added')
-    b.addEventListener('click', () => {
-      isGamePaused = false
-      menus[i].classList.add('d-none')
-      soundEffect.start.play(mousePos)
-      setTimeout(() => startMusic(mainMusic), 1000)
-      if (i) reStartGame()
-    })
-  })
-
-  document.querySelector('.pause-btn').addEventListener('click', e => {
-    if (!dogs.length) return
-
-    isGamePaused = !isGamePaused
-    if (isGamePaused) {
-      e.target.innerText = 'resume'
-      soundEffect.pause.play(mousePos)
-      stopMusic()
-    } else {
-      e.target.innerText = 'pause'
-      soundEffect.start.play(mousePos)
-      setTimeout(() => startMusic(mainMusic), 1000)
-    }
-  })
+  vec2(worldToScreen(300))
   startGame()
+  startMusic(introMusic)
 }
 
 function gameUpdate() {
   // called every frame at 60 frames per second - handle input and update the game state
-  // cameraScale = clamp(cameraScale * (1 - mouseWheel / 10), 1, 1e3)
+  cameraScale = clamp(cameraScale * (1 - mouseWheel / 10), 1, 1e3)
   dogs.forEach(dog => {
     if (dog?.target === 'player') {
       dog.item.velocity = dog.item.velocity.multiply(vec2(0.4))
@@ -72,14 +77,34 @@ function gameUpdate() {
 
 function gameUpdatePost() {
   // called after physics and objects are updated - setup camera and prepare for render
-  paused = isGamePaused
 
-  drawTextScreen(
-    'score',
-    vec2(mainCanvasSize.x - gameScore, 12),
-    16,
-    new Color(0, 0.3, 0.3),
-  )
+  if (mouseWasPressed(0)) {
+    if (
+      isGamePaused &&
+      (isElementClicked(startBtns[0]) || isElementClicked(startBtns[1]))
+    ) {
+      isGamePaused = false
+      pauseBtn.classList.remove('d-none')
+      soundEffect.start.play(mousePos)
+      clearTimeout(musicTimer)
+      stopMusic()
+      if (clickedElement === 'play-again') reStartGame()
+      menus[['start', 'play-again'].indexOf(clickedElement)]?.classList.add(
+        'd-none',
+      )
+      musicTimer = setTimeout(() => startMusic(mainMusic), 1000)
+    } else if (isElementClicked(pauseBtn)) {
+      togglePause()
+    }
+  }
+
+  // drawTextScreen(
+  //   'score',
+  //   vec2(mainCanvasSize.x - gameScore, 12),
+  //   16,
+  //   new Color(0, 0.3, 0.3),
+  // )
+  paused = isGamePaused
 }
 
 function gameRender() {
@@ -106,4 +131,5 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'balls.png',
   'foods.png',
   'other.png',
+  'alphabets.png',
 ])

@@ -85,3 +85,34 @@ class Score extends EngineObject {
     })
   }
 }
+
+// class Button extends EngineObject {
+//   constructor(pos, text) {
+//     super(pos, vec2(0.2))
+//     this.color = new Color(1, 1, 1)
+//     this.text = text
+//     this.updateText()
+//     this.pos
+//   }
+//   updateText() {
+//     this.tileInfos = this.text
+//       .split('')
+//       .reverse()
+//       .map(letter => {
+//         console.log('abcdefghijklmnopqrstuvwxyz'.split('').indexOf(letter))
+//         return new TileInfo(
+//           vec2(
+//             32 * ('abcdefghijklmnopqrstuvwxyz'.split('').indexOf(letter) || 0),
+//             0,
+//           ),
+//           vec2(32),
+//           6,
+//         )
+//       })
+//   }
+//   render() {
+//     this.tileInfos.forEach((tile, i) => {
+//       drawTile(this.pos.subtract(vec2(0.2 * i, 0)), this.size, tile, this.color)
+//     })
+//   }
+// }
