@@ -1,3 +1,4 @@
+const menus = document.querySelectorAll('.menu')
 const dogs = []
 let selectedItem
 let timeCount

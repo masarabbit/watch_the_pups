@@ -153,6 +153,10 @@ class Dog extends EngineObject {
     gameScore.updateScore()
   }
   update() {
+    if (this.target === 'player') {
+      this.item.velocity = this.item.velocity.multiply(vec2(0.4))
+    }
+
     if (this.satisfaction > 120 && !this.item.isFetched) {
       if (this.lingerCount <= 200) {
         if (!this.reaction) {

@@ -2,7 +2,6 @@
 // TODO add instruction
 // TODO add music toggle
 
-// TODO add pause button image
 // TODO add intro image ? (based on new dog sprites)
 
 const startGame = () => {
@@ -32,6 +31,32 @@ const reStartGame = () => {
 }
 function gameInit() {
   // called once after the engine starts up - setup the game
+
+  document.querySelectorAll('.start-btn').forEach((b, i) => {
+    console.log('button actions added')
+    b.addEventListener('click', () => {
+      isGamePaused = false
+      menus[i].classList.add('d-none')
+      soundEffect.start.play(mousePos)
+      setTimeout(() => startMusic(mainMusic), 1000)
+      if (i) reStartGame()
+    })
+  })
+
+  document.querySelector('.pause-btn').addEventListener('click', e => {
+    if (!dogs.length) return
+
+    isGamePaused = !isGamePaused
+    if (isGamePaused) {
+      e.target.innerText = 'resume'
+      soundEffect.pause.play(mousePos)
+      stopMusic()
+    } else {
+      e.target.innerText = 'pause'
+      soundEffect.start.play(mousePos)
+      setTimeout(() => startMusic(mainMusic), 1000)
+    }
+  })
   startGame()
 }
 
@@ -47,8 +72,6 @@ function gameUpdate() {
 
 function gameUpdatePost() {
   // called after physics and objects are updated - setup camera and prepare for render
-  // const menuVisible = getMenuVisible()
-  // paused = menuVisible
   paused = isGamePaused
 
   drawTextScreen(
@@ -84,34 +107,3 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'foods.png',
   'other.png',
 ])
-
-function init() {
-  const menus = document.querySelectorAll('.menu')
-
-  document.querySelectorAll('.start-btn').forEach((b, i) => {
-    b.addEventListener('click', () => {
-      isGamePaused = false
-      menus[i].classList.add('d-none')
-      soundEffect.start.play(mousePos)
-      setTimeout(() => startMusic(mainMusic), 1000)
-      if (i) reStartGame()
-    })
-  })
-
-  document.querySelector('.pause-btn').addEventListener('click', e => {
-    if (!dogs.length) return
-
-    isGamePaused = !isGamePaused
-    if (isGamePaused) {
-      e.target.innerText = 'resume'
-      soundEffect.pause.play(mousePos)
-      stopMusic()
-    } else {
-      e.target.innerText = 'pause'
-      soundEffect.start.play(mousePos)
-      setTimeout(() => startMusic(mainMusic), 1000)
-    }
-  })
-}
-
-window.addEventListener('DOMContentLoaded', init)
