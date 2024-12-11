@@ -1,6 +1,10 @@
 body {
-  font-family: 'Press Start 2P', sans-serif;
-  font-size: 16px;
+  /* font-family: 'Press Start 2P', sans-serif; */
+  font-family: 'Jersey 10', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+  letter-spacing: 1px;
 }
 .wrapper {
   position: absolute;
@@ -14,24 +18,45 @@ body {
 }
 .menu {
   gap: 20px;
-  padding: 24px;
+  padding: 24px 30px;
   min-width: 300px;
+  max-width: 320px;
   min-height: 200px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  background-color: white;
+  background-color: rgb(90, 49, 12);
+  color: #fff;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 400;
+}
+
+p {
+  font-size: 26px;
+  margin: 0;
 }
 
 button {
-  /* justify-self: end; */
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: 'Jersey 10', sans-serif;
   border: 0;
   background-color: hotpink;
   color: #fff;
-  padding: 16px 20px;
-  font-size: 16px;
+  padding: 8px 20px;
+  font-size: 30px;
   cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  text-transform: uppercase;
 }
 
 button:hover {
@@ -68,7 +93,7 @@ a:hover {
   bottom: 10px;
   left: 10px;
   padding: 8px 12px;
-  font-size: 12px;
+  font-size: 18px;
   z-index: 1;
   /* width: 64px;
   height: 64px;

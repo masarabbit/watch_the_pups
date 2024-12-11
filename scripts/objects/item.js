@@ -6,8 +6,8 @@ class Item extends EngineObject {
     this.isSelected = false
     this.color = new Color(1, 1, 1)
     this.throwAngle = 0
-    this.type = type || 'ball'
-    ;(this.sprite = ['ball', 'bowl'].includes(this.type)
+    this.type = type || 'toy'
+    ;(this.sprite = ['toy', 'bowl'].includes(this.type)
       ? items[this.type].sprite()
       : vec2(32 * items[this.type].sprite, 0)),
       (this.tileInfo = new TileInfo(
@@ -32,7 +32,7 @@ class Item extends EngineObject {
     this.throwBoost = 0
   }
   isPlayItem() {
-    return ['ball', 'bone'].includes(this.type)
+    return ['toy', 'bone'].includes(this.type)
   }
   update() {
     const dog = this.dog
@@ -92,7 +92,7 @@ class Item extends EngineObject {
       if (this.foodAmount && ![0, 360].includes(this.angle)) {
         this.type = 'bowl'
         this.foodAmount = 0
-        this.tileInfo.pos = vec2(32 * items.bowl)
+        this.tileInfo.pos = this.sprite
       }
     }
 
@@ -175,7 +175,12 @@ class Food extends EngineObject {
     drawTile(this.pos, vec2(0.5), this.tileInfo, this.color, this.angle)
   }
   collideWithObject(o) {
-    if (o?.type === 'bowl' && !o?.isFetched && [360, 0].includes(o.angle)) {
+    if (
+      o?.type === 'bowl' &&
+      !o?.isFetched &&
+      [360, 0].includes(o.angle) &&
+      o.foodAmount <= 120
+    ) {
       if (o.foodAmount % 20 === 0) soundEffect.pourFood.play(this.pos)
       this.angle = degToRad(getAdjustedAngle(this.pos, o.pos) < 180 ? 45 : -45)
       o.foodAmount++
@@ -185,7 +190,6 @@ class Food extends EngineObject {
       )
 
       if (o.foodAmount > 120) {
-        o.type = 'filledBowl'
         o.tileInfo.pos = vec2(32 * 3, o.sprite.y)
         soundEffect.foodReady.play(this.pos)
       }

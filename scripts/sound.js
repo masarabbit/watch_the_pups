@@ -12,7 +12,7 @@ const soundEffect = {
 }
 
 const itemThrowSound = {
-  ball : new Sound(
+  toy : new Sound(
     [0.5, , 643, , 0.1, 0.12, 1, 0.1, , 99, , , , , , , , 0.6, 0.02, , -732]
   ), // Pickup 7
   bone: new Sound(
@@ -21,9 +21,6 @@ const itemThrowSound = {
   bowl: new Sound(
     [1.9,,316,,.02,.16,1,1.7,,,,,,,,.1,.03,.8,.03,,472]
   ), // Pickup 6
-  filledBowl: new Sound(
-    [1.9,,302,,.02,.16,1,1.7,,,-50,,,,,.1,.03,.8,.03,,472]
-  ), // Pickup 6 - Copy 1
   brush: new Sound(
     [,,346,,.07,.17,1,2.6,,,,,,,,,,.9,.02]
   )// Pickup 14

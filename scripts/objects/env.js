@@ -43,6 +43,7 @@ class Time extends EngineObject {
       isGamePaused = true
       startMusic(endMusic)
       menus[1].classList.remove('d-none')
+      clearTimeout(musicTimer)
     }
 
     this.firstDigit.pos = vec2(12 * this.offset1, 0)

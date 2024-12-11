@@ -50,6 +50,7 @@ const introMusic = {
 }
 
 const startMusic = track => {
+  if (!soundEnable) return
   stopMusic()
   music = track
   music.bpm = music.defaultBpm

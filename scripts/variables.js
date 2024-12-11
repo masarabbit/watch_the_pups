@@ -23,7 +23,7 @@ let levelSize = vec2(
   Math.round(window.innerHeight / cameraScale),
 )
 
-const itemTypes = ['bone', 'bowl', 'ball', 'brush']
+const itemTypes = ['bone', 'bowl', 'toy', 'brush']
 
 //music
 let timeline = 0

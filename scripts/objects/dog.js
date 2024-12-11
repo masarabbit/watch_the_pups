@@ -9,9 +9,8 @@ class Reaction extends EngineObject {
           reactions[
             {
               bone: 'star',
-              ball: 'star',
+              toy: 'star',
               brush: 'heart',
-              filledBowl: 'sun',
               bowl: 'sun',
             }[dog.item.type]
           ],
@@ -57,6 +56,7 @@ class Dog extends EngineObject {
     this.state = 'default'
     this.maxSpeed = 0.05
     this.dogIndex = i
+    this.reaction = null
   }
   eat() {
     this.velocity = vec2(0)
@@ -79,7 +79,7 @@ class Dog extends EngineObject {
     if (this.satisfaction > 120) {
       this.state = 'happy'
       this.item.type = 'bowl'
-      this.item.tileInfo.pos = vec2(32 * items.bowl)
+      this.item.tileInfo.pos = this.item.sprite
     }
   }
   releaseItem() {
@@ -145,9 +145,8 @@ class Dog extends EngineObject {
   updateScore() {
     gameScore.number += {
       bone: 100,
-      ball: 100,
+      toy: 100,
       bowl: 500,
-      filledBowl: 500,
       brush: 300,
     }[this.item.type]
     gameScore.updateScore()
@@ -172,7 +171,8 @@ class Dog extends EngineObject {
       }
     } else if (
       // when food is ready
-      this.item.type === 'filledBowl' &&
+      this.item.foodAmount > 120 &&
+      this.satisfaction <= 120 &&
       this.pos.distance(this.item.pos) < 0.5
     ) {
       this.eat()

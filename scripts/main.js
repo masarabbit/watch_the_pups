@@ -1,5 +1,4 @@
 'use strict'
-// TODO add instruction
 // TODO add music toggle
 // TODO adjust sprite colours to make them consistent
 
@@ -18,24 +17,22 @@ const startGame = () => {
 }
 
 const reStartGame = () => {
-  console.log('restart', gameTime)
   if (dogs.length) {
     dogs.forEach(dog => {
       dog.item.destroy()
+      if (dog.reaction) dog.reaction.destroy()
       dog.destroy()
     })
     dogs.length = 0
   }
   if (food) food.destroy()
-  if (gameTime) {
-    gameTime.destroy()
-    console.log('destroy')
-  }
+  if (gameTime) gameTime.destroy()
   if (gameScore) gameScore.destroy()
   startGame()
 }
 
 const togglePause = () => {
+  if (!gameTime.time) return
   isGamePaused = !isGamePaused
   if (isGamePaused) {
     pauseBtn.innerText = 'resume'
@@ -128,7 +125,7 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'puppies.png',
   'numbers.png',
   'reactions.png',
-  'balls.png',
+  'toys.png',
   'foods.png',
   'other.png',
   'alphabets.png',
