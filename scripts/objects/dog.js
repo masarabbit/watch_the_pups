@@ -173,7 +173,7 @@ class Dog extends EngineObject {
       // when food is ready
       this.item.foodAmount > 120 &&
       this.satisfaction <= 120 &&
-      this.pos.distance(this.item.pos) < 0.5
+      this.pos.distance(this.item.pos) < 0.4
     ) {
       this.eat()
     } else if (this.state === 'idle') {
