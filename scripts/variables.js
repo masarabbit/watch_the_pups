@@ -1,6 +1,8 @@
 const menus = document.querySelectorAll('.menu')
 const startBtns = document.querySelectorAll('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
+const soundBtn = document.querySelector('.sound-btn')
+const footer = document.querySelector('footer')
 const dogs = []
 let selectedItem
 let timeCount

@@ -1,6 +1,7 @@
 'use strict'
-// TODO add music toggle
 // TODO adjust sprite colours to make them consistent
+// TODO block out section so pause button doesn't get in the way
+// TODO add time and score icon or text?
 
 // TODO add intro image ? (based on new dog sprites)
 
@@ -47,6 +48,23 @@ const togglePause = () => {
   }
 }
 
+const toggleSound = () => {
+  if (soundEnable) soundEffect.pause.play(mousePos)
+  soundEnable = !soundEnable
+  if (!soundEnable) {
+    soundBtn.innerText = 'sound: off'
+    clearTimeout(musicTimer)
+    stopMusic()
+  } else {
+    soundBtn.innerText = 'sound: on'
+
+    soundEffect.start.play(mousePos)
+    clearTimeout(musicTimer)
+    if (!isGamePaused)
+      musicTimer = setTimeout(() => startMusic(mainMusic), 1000)
+  }
+}
+
 // window.addEventListener('resize', () => {
 //   if (!isGamePaused) togglePause()
 //   levelSize = vec2(
@@ -59,7 +77,7 @@ function gameInit() {
   // called once after the engine starts up - setup the game
   vec2(worldToScreen(300))
   startGame()
-  startMusic(introMusic)
+  // startMusic(introMusic)
 }
 
 function gameUpdate() {
@@ -93,6 +111,8 @@ function gameUpdatePost() {
     } else if (isElementClicked(pauseBtn)) {
       togglePause()
     }
+
+    if (isElementClicked(soundBtn)) toggleSound()
   }
 
   // drawTextScreen(
@@ -112,12 +132,8 @@ function gameRender() {
 
 function gameRenderPost() {
   // called after objects are rendered - draw effects or hud that appear above all objects
-  gameTime.pos = screenToWorld(
-    vec2(overlayCanvas.width / 15, overlayCanvas.height / 26),
-  )
-  gameScore.pos = screenToWorld(
-    vec2(overlayCanvas.width * (14 / 15), overlayCanvas.height / 26),
-  )
+  gameTime.pos = screenToWorld(vec2(overlayCanvas.width / 15 + 10, 36))
+  gameScore.pos = screenToWorld(vec2(overlayCanvas.width * (14 / 15) + 2, 36))
 }
 
 // Startup LittleJS Engine
@@ -127,6 +143,7 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'reactions.png',
   'toys.png',
   'foods.png',
-  'other.png',
-  'alphabets.png',
+  'food.png',
+  'brushes.png',
+  'bones.png',
 ])

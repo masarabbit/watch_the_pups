@@ -1,10 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   /* font-family: 'Press Start 2P', sans-serif; */
   font-family: 'Jersey 10', sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 30px;
-  letter-spacing: 1px;
+  --brown: #5a310c;
 }
 .wrapper {
   position: absolute;
@@ -18,7 +22,7 @@ body {
 }
 .menu {
   gap: 20px;
-  padding: 24px 30px;
+  padding: 40px 20px 20px;
   min-width: 300px;
   max-width: 320px;
   min-height: 200px;
@@ -26,24 +30,41 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: rgb(90, 49, 12);
+  background-color: var(--brown);
   color: #fff;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 8px calc(100% / 15 - 14px) 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  font-size: 18px;
+  color: var(--brown);
 }
 
 h1,
 h2,
 p {
   margin: 0;
+  letter-spacing: 1px;
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 64px;
   font-weight: 400;
+  line-height: 1rem;
+  margin-bottom: 10px;
 }
 
 p {
-  font-size: 26px;
-  margin: 0;
+  font-size: 24px;
 }
 
 button {
@@ -55,7 +76,6 @@ button {
   font-size: 30px;
   cursor: pointer;
   letter-spacing: 1px;
-  margin-top: 20px;
   text-transform: uppercase;
 }
 
@@ -63,10 +83,14 @@ button:hover {
   background-color: rgb(44, 144, 252);
 }
 
+.start-btn {
+  margin-top: 10px;
+}
+
 .sign {
   position: fixed;
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(1, 49, 48);
+  color: #fff;
   bottom: 10px;
   right: 10px;
   font-size: 10px;
@@ -75,7 +99,7 @@ button:hover {
 }
 
 a {
-  color: rgb(1, 49, 48);
+  color: #fff;
   text-decoration: none;
   text-transform: none;
 }
@@ -88,16 +112,23 @@ a:hover {
   display: none;
 }
 
-.pause-btn {
+footer {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--brown);
+  /* height: 50px; */
+  width: 100%;
+  padding: 8px;
+  z-index: 1;
+}
+
+footer > .btn {
   padding: 8px 12px;
   font-size: 18px;
   z-index: 1;
-  /* width: 64px;
-  height: 64px;
-  background-size: 64px;
-  image-rendering: pixelated;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAEVJREFUWEft1jEKADAIBLDe/x9t6dqhUBBc4q4ewcGs4crw/iUAgadAVdV9pElae1qHnbC/oQUgQIAAAQIECBDwFRMgsAFZoKAhQC4INAAAAABJRU5ErkJggg==); */
+}
+
+.sound-btn {
+  margin-right: 5px;
 }

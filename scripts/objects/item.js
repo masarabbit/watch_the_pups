@@ -7,14 +7,12 @@ class Item extends EngineObject {
     this.color = new Color(1, 1, 1)
     this.throwAngle = 0
     this.type = type || 'toy'
-    ;(this.sprite = ['toy', 'bowl'].includes(this.type)
-      ? items[this.type].sprite()
-      : vec2(32 * items[this.type].sprite, 0)),
-      (this.tileInfo = new TileInfo(
-        this.sprite,
-        vec2(32),
-        items[this.type].spriteSheet,
-      ))
+    this.sprite = items[this.type].sprite()
+    this.tileInfo = new TileInfo(
+      this.sprite,
+      vec2(32),
+      items[this.type].spriteSheet,
+    )
     this.dog = dog
     this.dragStartMousePos = null
     this.dragStartPos = null
@@ -52,6 +50,7 @@ class Item extends EngineObject {
     } else if (
       mouseWasPressed(0) &&
       !this.isSelected &&
+      !isElementClicked(footer) &&
       mousePos.distance(this.pos) < 0.25
     ) {
       selectedItem = this

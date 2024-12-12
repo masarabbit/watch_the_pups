@@ -39,18 +39,17 @@ const endMusic = {
   musicLength: 12,
 }
 
-const introMusic = {
-  notes: unpackMusic(
-    '2.c.5.t-6.g.5.t-10.c.5.t-14.g.5.t-18.d.5.t-22.a.5.t-26.d.5.t-30.a.5.t-2.a.4.q-3.a.4.q-6.b.4.q-10.g.4.q-11.g.4.q-14.a.4.q-18.a.4.q-20.b.4.q-22.e.5.q-24.g.5.q-26.e.5.q-28.d.5.q-8.g.6.w-7.f.6.w-9.b.6.w-12.d.6.w-13.e.6.w-14.f.6.w-15.g.6.w-19.f.6.w-20.g.6.w-21.b.6.w-22.e.6.w-23.g.6.w-24.f.6.w-25.g.6.w-26.a.6.w-28.b.6.w-31.g.6.w-30.a.6.w',
-  ),
-  defaultBpm: 110,
-  bpm: 110,
-  loop: true,
-  musicLength: 32,
-}
+// const introMusic = {
+//   notes: unpackMusic(
+//     '2.c.5.t-6.g.5.t-10.c.5.t-14.g.5.t-18.d.5.t-22.a.5.t-26.d.5.t-30.a.5.t-2.a.4.q-3.a.4.q-6.b.4.q-10.g.4.q-11.g.4.q-14.a.4.q-18.a.4.q-20.b.4.q-22.e.5.q-24.g.5.q-26.e.5.q-28.d.5.q-8.g.6.w-7.f.6.w-9.b.6.w-12.d.6.w-13.e.6.w-14.f.6.w-15.g.6.w-19.f.6.w-20.g.6.w-21.b.6.w-22.e.6.w-23.g.6.w-24.f.6.w-25.g.6.w-26.a.6.w-28.b.6.w-31.g.6.w-30.a.6.w',
+//   ),
+//   defaultBpm: 110,
+//   bpm: 110,
+//   loop: true,
+//   musicLength: 32,
+// }
 
 const startMusic = track => {
-  if (!soundEnable) return
   stopMusic()
   music = track
   music.bpm = music.defaultBpm
@@ -96,7 +95,7 @@ const playBlock = block => {
 }
 
 const playMusic = playOn => {
-  if (!music) return
+  if (!music || !soundEnable) return
   if (!playOn) stopMusic()
   music.notes.forEach(block => {
     if (block.y === timeline) playBlock(block)

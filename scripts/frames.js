@@ -71,15 +71,15 @@ const items = {
     spriteSheet: 3,
   },
   bone: {
-    sprite: 1,
-    spriteSheet: 5,
+    sprite: () => vec2(-32 * randomN(4) - 1, 0),
+    spriteSheet: 7,
   },
   brush: {
-    sprite: 2,
-    spriteSheet: 5,
+    sprite: () => vec2(-32 * randomN(4) - 1, 0),
+    spriteSheet: 6,
   },
   bowl: {
-    sprite: () => vec2(0, 32 * randomN(3) - 1),
+    sprite: () => vec2(0, 32 * randomN(4) - 1),
     spriteSheet: 4,
   },
 }
