@@ -1,9 +1,6 @@
 'use strict'
 // TODO adjust sprite colours to make them consistent
-// TODO block out section so pause button doesn't get in the way
-// TODO add time and score icon or text?
-
-// TODO add intro image ? (based on new dog sprites)
+//? TODO block out section so pause button doesn't get in the way
 
 const startGame = () => {
   itemTypes.forEach((item, i) => {
@@ -137,7 +134,7 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'numbers.png',
   'reactions.png',
   'toys.png',
-  'foods.png',
+  'bowls.png',
   'food.png',
   'brushes.png',
   'bones.png',

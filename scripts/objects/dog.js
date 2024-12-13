@@ -88,7 +88,7 @@ class Dog extends EngineObject {
         this.state = 'idle'
       }
       if (this.item.isPlayItem()) {
-        this.satisfaction += this.item.satisfactionPoint
+        this.satisfaction += this.item.satisfactionPoint + 40
         this.item.satisfactionPoint = 0
       }
       this.item.velocity = vec2(0, 0.08).rotate(getItemRad(this.pos, mousePos))

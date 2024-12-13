@@ -8,7 +8,7 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: 30px;
-  --brown: #5a310c;
+  --brown: #502407;
 }
 .wrapper {
   position: absolute;
@@ -58,7 +58,7 @@ p {
 }
 
 h1 {
-  font-size: 62px;
+  font-size: 50px;
   font-weight: 400;
   line-height: 1rem;
   margin-bottom: 10px;
@@ -71,17 +71,19 @@ p {
 button {
   font-family: 'Jersey 10', sans-serif;
   border: 0;
-  background-color: hotpink;
+  background-color: #ec6a91;
   color: #fff;
   padding: 8px 20px;
   font-size: 30px;
   cursor: pointer;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-style: normal;
+  /* text-transform: uppercase; */
 }
 
 button:hover {
-  background-color: rgb(44, 144, 252);
+  background-color: #4cb4c2;
 }
 
 .start-btn {
@@ -118,13 +120,13 @@ footer {
   bottom: 0;
   left: 0;
   background-color: var(--brown);
-  /* height: 50px; */
   width: 100%;
   padding: 8px;
   z-index: 1;
 }
 
-footer > .btn {
+footer > button {
+  background-color: #cf8b54;
   padding: 8px 12px;
   font-size: 18px;
   z-index: 1;
