@@ -66,7 +66,6 @@ const toggleSound = () => {
 }
 
 // window.addEventListener('resize', () => {
-//   if (!isGamePaused) togglePause()
 //   levelSize = vec2(
 //     Math.round(window.innerWidth / cameraScale),
 //     Math.round(window.innerHeight / cameraScale),
@@ -115,12 +114,6 @@ function gameUpdatePost() {
     if (isElementClicked(soundBtn)) toggleSound()
   }
 
-  // drawTextScreen(
-  //   'score',
-  //   vec2(mainCanvasSize.x - gameScore, 12),
-  //   16,
-  //   new Color(0, 0.3, 0.3),
-  // )
   paused = isGamePaused
 }
 
@@ -134,6 +127,8 @@ function gameRenderPost() {
   // called after objects are rendered - draw effects or hud that appear above all objects
   gameTime.pos = screenToWorld(vec2(overlayCanvas.width / 15 + 10, 36))
   gameScore.pos = screenToWorld(vec2(overlayCanvas.width * (14 / 15) + 2, 36))
+
+  // drawTextScreen('score', cameraPos, 16, new Color(0, 0.3, 0.3))
 }
 
 // Startup LittleJS Engine
