@@ -21,6 +21,7 @@ body {
   /* opacity: 0.2; */
 }
 .menu {
+  position: relative;
   gap: 20px;
   padding: 40px 24px 20px;
   min-width: 300px;
@@ -136,9 +137,17 @@ footer > button {
   margin-right: 5px;
 }
 
-.pix {
-  display: inline-block;
-  /* border: 1px solid yellow; */
+.sticker {
+  position: absolute;
+  --size: 64px;
+  width: var(--size);
+  height: var(--size);
+  top: 0;
+  left: 0;
+  background-image: url('/stickers.png');
+  background-size: calc(var(--size) * 8) var(--size);
+  border: 1px solid yellow;
+  image-rendering: pixelated;
 }
 
 .pix::after {
@@ -149,64 +158,4 @@ footer > button {
   image-rendering: pixelated;
   width: 48px;
   height: 48px;
-}
-
-.puppy {
-  width: 40px;
-  height: 20px;
-}
-
-.puppy:after {
-  background-size: 720px 192px;
-  background-image: url('/puppies.png');
-  background-position: calc(720px * (5 / 15)) 0;
-  transform: translate(-24%, -40%);
-}
-
-.toy {
-  width: 30px;
-  height: 20px;
-}
-
-.toy::after {
-  background-size: 192px 48px;
-  background-image: url('/toys.png');
-  background-position: 0 0;
-  transform: translate(-25%, -25%);
-}
-
-.bowl {
-  width: 30px;
-  height: 20px;
-}
-
-.bowl::after {
-  background-size: 192px 192px;
-  background-image: url('/foods.png');
-  background-position: 96px 96px;
-  transform: translate(-25%, -25%);
-}
-
-.brush {
-  width: 40px;
-  height: 20px;
-}
-
-.brush::after {
-  background-size: 192px 48px;
-  background-image: url('/brushes.png');
-  background-position: 0;
-  transform: translate(-10%, -24%);
-}
-
-.food {
-  width: 32px;
-  height: 20px;
-}
-
-.food::after {
-  background-size: 48px;
-  background-image: url('/food.png');
-  background-position: 96px 96px;
-  transform: translate(-16%, -25%);
 }
