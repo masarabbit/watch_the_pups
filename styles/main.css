@@ -144,7 +144,7 @@ footer > button {
   height: var(--size);
   top: 0;
   left: 0;
-  background-image: url('/assets/stickers.png');
+  background-image: url('../assets/stickers.png');
   background-size: calc(var(--size) * 8) var(--size);
   border: 1px solid yellow;
   image-rendering: pixelated;
