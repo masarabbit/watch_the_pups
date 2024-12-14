@@ -142,20 +142,54 @@ footer > button {
   --size: 64px;
   width: var(--size);
   height: var(--size);
-  top: 0;
-  left: 0;
   background-image: url('../assets/stickers.png');
   background-size: calc(var(--size) * 8) var(--size);
-  border: 1px solid yellow;
   image-rendering: pixelated;
 }
 
-.pix::after {
-  content: '';
-  position: absolute;
-  /* display: inline-block; */
-  /* border: 1px solid yellow; */
-  image-rendering: pixelated;
-  width: 48px;
-  height: 48px;
+.puppy-1 {
+  top: -30px;
+  left: -15px;
+}
+
+.puppy-2 {
+  bottom: -25px;
+  right: 0px;
+  background-position: calc(var(--size) * -1), 0;
+}
+
+.puppy-3 {
+  bottom: 25px;
+  left: -25px;
+  background-position: calc(var(--size) * -2), 0;
+}
+
+.brush {
+  bottom: 50px;
+  left: 5px;
+  background-position: calc(var(--size) * -6), 0;
+}
+
+.bowl {
+  top: 40px;
+  right: -20px;
+  background-position: calc(var(--size) * -5), 0;
+}
+
+.bone {
+  bottom: 40px;
+  right: -15px;
+  background-position: calc(var(--size) * -4), 0;
+}
+
+.ball {
+  bottom: 5px;
+  right: 35px;
+  background-position: calc(var(--size) * -3), 0;
+}
+
+.paw {
+  top: -20px;
+  right: 30px;
+  background-position: calc(var(--size) * -7), 0;
 }
