@@ -130,12 +130,12 @@ function gameRenderPost() {
 
 // Startup LittleJS Engine
 engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
-  'puppies.png',
-  'numbers.png',
-  'reactions.png',
-  'toys.png',
-  'bowls.png',
-  'food.png',
-  'brushes.png',
-  'bones.png',
+  'assets/puppies.png',
+  'assets/numbers.png',
+  'assets/reactions.png',
+  'assets/toys.png',
+  'assets/bowls.png',
+  'assets/food.png',
+  'assets/brushes.png',
+  'assets/bones.png',
 ])
