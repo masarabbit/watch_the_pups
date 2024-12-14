@@ -4,6 +4,7 @@ const pauseBtn = document.querySelector('.pause-btn')
 const soundBtn = document.querySelector('.sound-btn')
 const footer = document.querySelector('footer')
 const dogs = []
+let miniDog
 let selectedItem
 let timeCount
 let gameTime

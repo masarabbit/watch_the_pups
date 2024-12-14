@@ -1,11 +1,10 @@
 'use strict'
-// TODO adjust sprite colours to make them consistent
-//? TODO block out section so pause button doesn't get in the way
 
 const startGame = () => {
   itemTypes.forEach((item, i) => {
     dogs.push(new Dog(getRandomPos(i * 1000), item, i))
   })
+  // miniDog = new MiniDog(cameraPos.copy())
   food = new Food(
     screenToWorld(vec2(mainCanvasSize.x - 80, mainCanvasSize.y - 80)),
   )
@@ -78,7 +77,7 @@ function gameInit() {
 
 function gameUpdate() {
   // called every frame at 60 frames per second - handle input and update the game state
-  cameraScale = clamp(cameraScale * (1 - mouseWheel / 10), 1, 1e3)
+  // cameraScale = clamp(cameraScale * (1 - mouseWheel / 10), 1, 1e3)
   dogs.forEach(dog => {
     if (dog?.target === 'player') {
       dog.item.velocity = dog.item.velocity.multiply(vec2(0.4))
@@ -138,4 +137,5 @@ engineInit(gameInit, gameUpdate, gameUpdatePost, gameRender, gameRenderPost, [
   'assets/food.png',
   'assets/brushes.png',
   'assets/bones.png',
+  'assets/mini_puppy.png',
 ])

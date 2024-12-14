@@ -136,7 +136,7 @@ class Food extends EngineObject {
     this.dragStartMousePos = null
     this.dragStartPos = null
     this.prevPos = null
-    this.isFetched = true
+    this.isFetched = false
     this.frames = walkFrames(vec2(0, -0.02), vec2(0), vec2(0, -0.02))
   }
   update() {
@@ -145,6 +145,13 @@ class Food extends EngineObject {
     if (!isItemOutsideViewPort(this.pos)) {
       food = new Food(this.defaultPos)
       this.destroy()
+    }
+    if (this.isFetched) {
+      const offset = this.frames[miniDog.animationIndex]
+      this.pos = miniDog.pos
+        .add(dogAnimationFrames[miniDog.angle].foodOffset)
+        .add(offset)
+      this.angle = 0
     }
     if (
       mouseWasPressed(0) &&
@@ -193,6 +200,7 @@ class Food extends EngineObject {
         soundEffect.foodReady.play(this.pos)
       }
     }
+    if (o === miniDog) return o.pos.distance(this.pos) < 0.2
     return true
   }
 }

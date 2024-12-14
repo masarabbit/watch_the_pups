@@ -1,43 +1,17 @@
-class Reaction extends EngineObject {
-  constructor(dog) {
-    super(vec2(dog.pos.x, dog.pos.y + 0.5), vec2(0.5))
-    this.size = vec2(0.5)
-    this.dog = dog
-    this.tileInfo = new TileInfo(
-      vec2(
-        32 *
-          reactions[
-            {
-              bone: 'star',
-              toy: 'star',
-              brush: 'heart',
-              bowl: 'sun',
-            }[dog.item.type]
-          ],
-        2,
-      ),
-      vec2(32),
-      2,
-    )
-  }
-  update() {
-    this.pos = vec2(this.dog.pos.x, this.dog.pos.y + 0.5)
-    if (this.dog.lingerCount >= 200) {
-      this.destroy()
-      createNewDog(
-        itemTypes.filter(item => item !== this.dog.item.type)[randomN(3) - 1],
-        randomN(4) - 1,
-      )
-      if (gameScore.number > 800)
-        createNewDog(this.dog.item.type, randomN(7) - 1)
-    }
-    super.update()
-  }
-  render() {
-    drawTile(this.pos, vec2(0.5), this.tileInfo)
-  }
-}
+const move = obj => {
+  obj.motion = vec2(obj.targetPos.x - obj.pos.x, obj.targetPos.y - obj.pos.y)
 
+  obj.velocity.x = clamp(
+    obj.velocity.x + obj.motion.x * 0.02,
+    -obj.maxSpeed,
+    obj.maxSpeed,
+  )
+  obj.velocity.y = clamp(
+    obj.velocity.y + obj.motion.y * 0.02,
+    -obj.maxSpeed,
+    obj.maxSpeed,
+  )
+}
 class Dog extends EngineObject {
   constructor(pos, item, i) {
     super(pos, vec2(0.5))
@@ -115,21 +89,7 @@ class Dog extends EngineObject {
 
     const gap = this.target === 'player' ? 0.2 : 0.3
     if (this.pos.distance(this.targetPos) > gap && !this.item.isSelected) {
-      this.motion = vec2(
-        this.targetPos.x - this.pos.x,
-        this.targetPos.y - this.pos.y,
-      )
-
-      this.velocity.x = clamp(
-        this.velocity.x + this.motion.x * 0.02,
-        -this.maxSpeed,
-        this.maxSpeed,
-      )
-      this.velocity.y = clamp(
-        this.velocity.y + this.motion.y * 0.02,
-        -this.maxSpeed,
-        this.maxSpeed,
-      )
+      move(this)
     } else {
       this.velocity = vec2(0)
       this.releaseItem()
@@ -201,6 +161,90 @@ class Dog extends EngineObject {
           32 * this.dogIndex,
         ),
       ),
+      this.color,
+      0,
+      dogAnimationFrames[this.angle].mirror,
+    )
+  }
+}
+
+class MiniDog extends EngineObject {
+  constructor(pos) {
+    super(pos, vec2(0.5))
+    this.setCollision()
+    this.pos = pos
+    this.animationFrames = dogAnimationFrames[90].indexes
+    this.animationIndex = 0
+    this.angle = 90
+    this.isMiniDog = true
+    this.color = new Color(1, 1, 1)
+    this.maxSpeed = 0.05
+    this.target = 'item'
+    this.homePos = getRandomPos(200)
+  }
+  releaseItem() {
+    if (food) {
+      food.velocity = vec2(0, 0.08).rotate(
+        getItemRad(this.pos, food.defaultPos),
+      )
+      food.isFetched = false
+      soundEffect.releaseItem.play(food.pos)
+      // this.destroy()
+    }
+  }
+  // moveAbout() {
+
+  // }
+  update() {
+    //TODO add logic to switch between food.defaultPos, homePos, foodPos
+
+    if (food.isSelected || this.pos.distance(food.defaultPos) < 0.2) {
+      this.target = 'home'
+      this.targetPos = this.homePos
+    } else {
+      this.targetPos =
+        this.target === 'item'
+          ? food.pos
+          : food.defaultPos.subtract(
+              dogAnimationFrames[miniDog.angle].foodOffset,
+            )
+    }
+    // if (food) this.moveAbout()
+
+    console.log(this.target)
+
+    this.angle = getAdjustedAngle(this.pos, this.targetPos)
+    this.animationFrames = dogAnimationFrames[this.angle].indexes
+
+    const gap = this.target === 'defaultPos' ? 0.3 : 0.2
+
+    if (
+      this.pos.distance(this.targetPos) > gap &&
+      !food.isSelected &&
+      this.target !== 'home'
+    ) {
+      this.target = 'item'
+      move(this)
+    } else {
+      this.velocity = vec2(0)
+      this.releaseItem()
+      if (this.target === 'item') {
+        soundEffect.fetch.play(this.pos)
+        this.target = 'defaultPos'
+        food.isFetched = true
+      }
+    }
+
+    this.animationIndex += 2
+    if (this.animationIndex >= this.animationFrames.length - 1)
+      this.animationIndex = 0
+    super.update()
+  }
+  render() {
+    drawTile(
+      this.pos,
+      vec2(0.5),
+      tile(vec2(32 * this.animationFrames[this.animationIndex], 0), 32, 8),
       this.color,
       0,
       dogAnimationFrames[this.angle].mirror,

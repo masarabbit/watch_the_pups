@@ -20,6 +20,8 @@ const dogAnimationFrames = {
     toyOffset: vec2(0, 0.3),
     boneOffset: vec2(0, 0.31),
     brushOffset: vec2(0, 0.34),
+    foodOffset: vec2(0),
+    foodOffset: vec2(0, 0.25),
   },
   90: {
     indexes: walkFrames(0, 1, 2),
@@ -28,6 +30,7 @@ const dogAnimationFrames = {
     boneOffset: vec2(0.13, -0.08),
     bowlOffset: vec2(0.13, -0.12),
     brushOffset: vec2(0.15, -0.14),
+    foodOffset: vec2(0, 0.32),
   },
   180: {
     indexes: walkFrames(3, 4, 5),
@@ -36,6 +39,7 @@ const dogAnimationFrames = {
     boneOffset: vec2(0, -0.15),
     bowlOffset: vec2(0, -0.19),
     brushOffset: vec2(0, -0.21),
+    foodOffset: vec2(0, 0.32),
   },
   270: {
     indexes: walkFrames(0, 1, 2),
@@ -44,6 +48,7 @@ const dogAnimationFrames = {
     boneOffset: vec2(-0.13, -0.08),
     bowlOffset: vec2(-0.13, -0.12),
     brushOffset: vec2(-0.1, -0.14),
+    foodOffset: vec2(0, 0.32),
   },
   idle: {
     indexes: twinFrames(9, 10),

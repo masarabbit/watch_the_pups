@@ -86,3 +86,43 @@ class Score extends EngineObject {
     })
   }
 }
+
+class Reaction extends EngineObject {
+  constructor(dog) {
+    super(vec2(dog.pos.x, dog.pos.y + 0.5), vec2(0.5))
+    this.size = vec2(0.5)
+    this.dog = dog
+    this.tileInfo = new TileInfo(
+      vec2(
+        32 *
+          reactions[
+            {
+              bone: 'star',
+              toy: 'star',
+              brush: 'heart',
+              bowl: 'sun',
+            }[dog.item.type]
+          ],
+        2,
+      ),
+      vec2(32),
+      2,
+    )
+  }
+  update() {
+    this.pos = vec2(this.dog.pos.x, this.dog.pos.y + 0.5)
+    if (this.dog.lingerCount >= 200) {
+      this.destroy()
+      createNewDog(
+        itemTypes.filter(item => item !== this.dog.item.type)[randomN(3) - 1],
+        randomN(4) - 1,
+      )
+      if (gameScore.number > 800)
+        createNewDog(this.dog.item.type, randomN(7) - 1)
+    }
+    super.update()
+  }
+  render() {
+    drawTile(this.pos, vec2(0.5), this.tileInfo)
+  }
+}
