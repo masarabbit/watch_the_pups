@@ -178,61 +178,31 @@ class MiniDog extends EngineObject {
     this.angle = 90
     this.isMiniDog = true
     this.color = new Color(1, 1, 1)
-    this.maxSpeed = 0.05
-    this.target = 'item'
-    this.homePos = getRandomPos(200)
+    this.maxSpeed = 0.1
+    this.target = 'defaultPos'
+    this.homePos = screenToWorld(
+      vec2(mainCanvasSize.x + 300, mainCanvasSize.y - 80),
+    )
   }
-  releaseItem() {
-    if (food) {
-      food.velocity = vec2(0, 0.08).rotate(
-        getItemRad(this.pos, food.defaultPos),
-      )
-      food.isFetched = false
-      soundEffect.releaseItem.play(food.pos)
-      // this.destroy()
-    }
-  }
-  // moveAbout() {
-
-  // }
   update() {
-    //TODO add logic to switch between food.defaultPos, homePos, foodPos
+    this.targetPos = {
+      defaultPos: getDefaultFoodPos(),
+      // item: food.pos,
+      home: this.homePos,
+    }[this.target]
 
-    if (food.isSelected || this.pos.distance(food.defaultPos) < 0.2) {
-      this.target = 'home'
-      this.targetPos = this.homePos
-    } else {
-      this.targetPos =
-        this.target === 'item'
-          ? food.pos
-          : food.defaultPos.subtract(
-              dogAnimationFrames[miniDog.angle].foodOffset,
-            )
-    }
-    // if (food) this.moveAbout()
-
-    console.log(this.target)
-
+    move(this)
     this.angle = getAdjustedAngle(this.pos, this.targetPos)
     this.animationFrames = dogAnimationFrames[this.angle].indexes
 
-    const gap = this.target === 'defaultPos' ? 0.3 : 0.2
+    if (food.isSelected) {
+      food.isFetched = false
+      this.target = 'home'
+    }
 
-    if (
-      this.pos.distance(this.targetPos) > gap &&
-      !food.isSelected &&
-      this.target !== 'home'
-    ) {
-      this.target = 'item'
-      move(this)
-    } else {
-      this.velocity = vec2(0)
-      this.releaseItem()
-      if (this.target === 'item') {
-        soundEffect.fetch.play(this.pos)
-        this.target = 'defaultPos'
-        food.isFetched = true
-      }
+    if (this.pos.distance(this.homePos) < 0.2) {
+      this.destroy()
+      miniDog = null
     }
 
     this.animationIndex += 2
@@ -249,5 +219,8 @@ class MiniDog extends EngineObject {
       0,
       dogAnimationFrames[this.angle].mirror,
     )
+  }
+  collideWithObject(o) {
+    return !o.isDog
   }
 }

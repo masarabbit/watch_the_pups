@@ -19,6 +19,8 @@ tileSizeDefault = (32, 32)
 tileFixBleedScale = 0.2
 objectDefaultDamping = 0.7
 objectDefaultAngleDamping = 0.99
+const getDefaultFoodPos = () =>
+  screenToWorld(vec2(mainCanvasSize.x - 80, mainCanvasSize.y - 80))
 
 cameraScale = 4 * 32
 let levelSize = vec2(

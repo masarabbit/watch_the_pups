@@ -34,7 +34,7 @@ class Item extends EngineObject {
   }
   update() {
     const dog = this.dog
-    if (!isItemOutsideViewPort(this.pos)) {
+    if (!isItemInsideViewPort(this.pos)) {
       dog.target = this.isFetched ? 'player' : 'item'
     }
 
@@ -127,7 +127,6 @@ class Item extends EngineObject {
 class Food extends EngineObject {
   constructor(pos) {
     super(pos, vec2(0.5))
-    this.defaultPos = pos
     this.setCollision()
     this.size = vec2(0.5)
     this.isSelected = false
@@ -141,9 +140,9 @@ class Food extends EngineObject {
   }
   update() {
     this.motion = vec2(0)
-    //? can add logic for a dog to bring it back into game
-    if (!isItemOutsideViewPort(this.pos)) {
-      food = new Food(this.defaultPos)
+
+    if (!isItemInsideViewPort(this.pos) && !miniDog) {
+      createMiniDog()
       this.destroy()
     }
     if (this.isFetched) {
@@ -182,6 +181,8 @@ class Food extends EngineObject {
   }
   collideWithObject(o) {
     if (
+      !this.isFetched &&
+      this.isSelected &&
       o?.type === 'bowl' &&
       !o?.isFetched &&
       [360, 0].includes(o.angle) &&

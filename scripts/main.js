@@ -4,11 +4,8 @@ const startGame = () => {
   itemTypes.forEach((item, i) => {
     dogs.push(new Dog(getRandomPos(i * 1000), item, i))
   })
-  // miniDog = new MiniDog(cameraPos.copy())
-  food = new Food(
-    screenToWorld(vec2(mainCanvasSize.x - 80, mainCanvasSize.y - 80)),
-  )
 
+  food = new Food(getDefaultFoodPos())
   gameTime = new Time(cameraPos, vec2(0.2))
   gameScore = new Score(cameraPos, vec2(0.2))
 }
@@ -78,11 +75,6 @@ function gameInit() {
 function gameUpdate() {
   // called every frame at 60 frames per second - handle input and update the game state
   // cameraScale = clamp(cameraScale * (1 - mouseWheel / 10), 1, 1e3)
-  dogs.forEach(dog => {
-    if (dog?.target === 'player') {
-      dog.item.velocity = dog.item.velocity.multiply(vec2(0.4))
-    }
-  })
 }
 
 function gameUpdatePost() {
@@ -123,8 +115,6 @@ function gameRenderPost() {
   // called after objects are rendered - draw effects or hud that appear above all objects
   gameTime.pos = screenToWorld(vec2(overlayCanvas.width / 15 + 10, 36))
   gameScore.pos = screenToWorld(vec2(overlayCanvas.width * (14 / 15) + 2, 36))
-
-  // drawTextScreen('score', cameraPos, 16, new Color(0, 0.3, 0.3))
 }
 
 // Startup LittleJS Engine
