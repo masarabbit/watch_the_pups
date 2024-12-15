@@ -61,10 +61,10 @@ class Dog extends EngineObject {
       if (this.item.type === 'bowl') {
         this.state = 'idle'
       }
-      if (this.item.isPlayItem()) {
-        this.satisfaction += this.item.satisfactionPoint + 40
-        this.item.satisfactionPoint = 0
-      }
+      // if (this.item.isPlayItem()) {
+      //   this.satisfaction += this.item.satisfactionPoint + 40
+      //   this.item.satisfactionPoint = 0
+      // }
       this.item.velocity = vec2(0, 0.08).rotate(getItemRad(this.pos, mousePos))
       this.item.isFetched = false
       soundEffect.releaseItem.play(this.item.pos)
@@ -93,7 +93,7 @@ class Dog extends EngineObject {
     } else {
       this.velocity = vec2(0)
       this.releaseItem()
-      if (this.target === 'item') {
+      if (this.target === 'item' && !this.item.isSelected) {
         soundEffect.fetch.play(this.pos)
         this.target = 'player'
         this.item.isFetched = true
@@ -124,7 +124,11 @@ class Dog extends EngineObject {
           soundEffect.happy.play(this.pos)
         }
         this.lingerCount++
-        this.animationFrames = dogAnimationFrames.happy.indexes
+        if (!['bone', 'toy'].includes(this.item.type)) {
+          this.animationFrames = dogAnimationFrames.happy.indexes
+        } else {
+          this.moveAbout()
+        }
       } else {
         this.target = 'item'
         this.moveAbout()
@@ -163,7 +167,7 @@ class Dog extends EngineObject {
       ),
       this.color,
       0,
-      dogAnimationFrames[this.angle].mirror,
+      this.state === 'relax' ? false : dogAnimationFrames[this.angle].mirror,
     )
   }
 }

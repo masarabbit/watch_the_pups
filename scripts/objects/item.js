@@ -24,9 +24,9 @@ class Item extends EngineObject {
     if (this.type === 'bowl') {
       this.foodAmount = 0
     }
-    if (this.isPlayItem()) {
-      this.satisfactionPoint = 0
-    }
+    // if (this.isPlayItem()) {
+    //   this.satisfactionPoint = 0
+    // }
     this.throwBoost = 0
   }
   isPlayItem() {
@@ -34,7 +34,7 @@ class Item extends EngineObject {
   }
   update() {
     const dog = this.dog
-    if (!isItemInsideViewPort(this.pos)) {
+    if (!isItemInsideViewPort(this.pos) && !this.isSelected) {
       dog.target = this.isFetched ? 'player' : 'item'
     }
 
@@ -80,7 +80,7 @@ class Item extends EngineObject {
       this.isSelected = false
       selectedItem = null
       if (this.isPlayItem()) {
-        this.satisfactionPoint += this.throwDistance * 5
+        this.dog.satisfaction += this.throwDistance * 5 + 40
       }
       this.throwDistance = 1
       this.throwBoost = 0
@@ -141,7 +141,7 @@ class Food extends EngineObject {
   update() {
     this.motion = vec2(0)
 
-    if (!isItemInsideViewPort(this.pos) && !miniDog) {
+    if (!isItemInsideViewPort(this.pos) && !miniDog && !this.isSelected) {
       createMiniDog()
       this.destroy()
     }

@@ -22,14 +22,14 @@ const degToRad = deg => deg / (180 / Math.PI)
 
 const isItemInsideViewPort = pos => {
   const { x, y } = pos
-  const buffer = 0.5
+  const buffer = 0.2
   // const footerHeight = screenToWorld(
   //   vec2(0, footer.getBoundingClientRect().height),
   // ).y
 
   return (
-    x - buffer > levelSize.x / -2 &&
-    x + buffer < levelSize.x / 2 &&
+    x + buffer > levelSize.x / -2 &&
+    x - buffer < levelSize.x / 2 &&
     y - buffer > levelSize.y / -2 &&
     y + buffer < levelSize.y / 2
   )

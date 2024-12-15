@@ -2,7 +2,7 @@
 
 const startGame = () => {
   itemTypes.forEach((item, i) => {
-    dogs.push(new Dog(getRandomPos(i * 1000), item, i))
+    dogs.push(new Dog(getRandomPos(i ? i * 1000 : 20), item, i))
   })
 
   food = new Food(getDefaultFoodPos())
@@ -22,6 +22,7 @@ const reStartGame = () => {
   if (food) food.destroy()
   if (gameTime) gameTime.destroy()
   if (gameScore) gameScore.destroy()
+  if (miniDog) miniDog.destroy()
   startGame()
 }
 
