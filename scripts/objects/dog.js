@@ -74,6 +74,7 @@ class Dog extends EngineObject {
     if (this.pos.distance(this.startingPos) < 1 && this.satisfaction > 120) {
       this.item.destroy()
       this.destroy()
+      if (this.item.isPlayItem()) this.lingerCount = 200
     }
 
     this.targetPos =
@@ -131,7 +132,6 @@ class Dog extends EngineObject {
         }
       } else {
         this.target = 'item'
-        this.moveAbout()
       }
     } else if (
       // when food is ready

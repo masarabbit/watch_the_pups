@@ -115,7 +115,7 @@ class Reaction extends EngineObject {
       this.destroy()
       createNewDog(
         itemTypes.filter(item => item !== this.dog.item.type)[randomN(3) - 1],
-        randomN(4) - 1,
+        randomN(7) - 1,
       )
       if (gameScore.number > 1000)
         createNewDog(this.dog.item.type, randomN(7) - 1)
