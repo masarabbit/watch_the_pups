@@ -132,6 +132,7 @@ class Dog extends EngineObject {
         }
       } else {
         this.target = 'item'
+        this.moveAbout()
       }
     } else if (
       // when food is ready

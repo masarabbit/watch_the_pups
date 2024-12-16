@@ -136,7 +136,6 @@ class Food extends EngineObject {
     this.tileInfo = new TileInfo(vec2(0), vec2(32), 5)
     this.dragStartMousePos = null
     this.dragStartPos = null
-    this.prevPos = null
     this.isFetched = false
     this.frames = walkFrames(vec2(0, -0.02), vec2(0), vec2(0, -0.02))
   }
