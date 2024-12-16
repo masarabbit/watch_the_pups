@@ -105,13 +105,15 @@ class Item extends EngineObject {
       this.isSelected &&
       this.type === 'brush' &&
       o === this.dog &&
-      this.dog.state !== 'happy'
+      this.dog.state !== 'happy' &&
+      this.pos.x !== this.prevPos.x
     ) {
       if (o.pos.distance(this.pos) < 0.5) {
+        this.prevPos = this.pos.copy()
         this.dog.state = 'relax'
         if (this.dog.satisfaction <= 120) {
           this.dog.satisfaction += 0.5
-          if (this.dog.satisfaction % 30 === 0)
+          if (this.dog.satisfaction % 20 === 0)
             soundEffect.brush.play(this.dog.pos)
         } else {
           this.dog.state = 'happy'
