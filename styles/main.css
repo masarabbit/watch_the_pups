@@ -158,7 +158,7 @@ footer > button {
 }
 
 .puppy-3 {
-  bottom: 25px;
+  bottom: 23px;
   left: -25px;
   background-position: calc(var(--size) * -2), 0;
 }
@@ -178,7 +178,7 @@ footer > button {
 }
 
 .brush {
-  bottom: 50px;
+  bottom: 47px;
   left: 5px;
   background-position: calc(var(--size) * -8), 0;
 }
