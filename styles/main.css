@@ -58,14 +58,20 @@ p {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 400;
-  line-height: 1rem;
-  margin-bottom: 10px;
+  line-height: 2rem;
+  margin-bottom: -5px;
+  text-align: left;
+}
+
+h1 span {
+  color: #fbeca2;
 }
 
 p {
-  font-size: 24px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 button {
@@ -170,8 +176,6 @@ footer > button {
 }
 
 .puppy-5 {
-  /* bottom: -10px;
-  right: 0px; */
   top: 45px;
   right: -28px;
   background-position: calc(var(--size) * -4), 0;
@@ -202,7 +206,7 @@ footer > button {
 }
 
 .paw {
-  top: -20px;
-  right: 30px;
+  top: -25px;
+  right: 10px;
   background-position: calc(var(--size) * -9), 0;
 }
